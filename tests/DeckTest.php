@@ -4,6 +4,7 @@ namespace Tcg\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Tcg\Deck;
+use Tcg\Player;
 
 class DeckTest extends TestCase
 {
@@ -11,16 +12,45 @@ class DeckTest extends TestCase
     {
         $deck = new Deck();
 
-        self::assertEquals($deck->getSize(), 20);
+        self::assertEquals(20, $deck->getSize());
     }
 
-    public function testCardInitialValues()
+    public function testDeckInitialValues()
     {
         $deck = new Deck();
-        $cardInitialValues = [0, 0, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 6, 6, 7, 8];
+        $cardInitialManaCosts = [
+            0,
+            0,
+            1,
+            1,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            4,
+            4,
+            4,
+            5,
+            5,
+            6,
+            6,
+            7,
+            8,
+        ];
 
         foreach ($deck->getCardCollection() as $card) {
-            self::assertEquals($card->getManaCost(), array_pop($cardInitialValues));
+            self::assertEquals(array_shift($cardInitialManaCosts), $card->getManaCost());
         }
+    }
+
+    public function testDeckRemainingCardsAfterInitialHand()
+    {
+        $player = new Player();
+        $playerDeck = $player->getDeck();
+
+        self::assertEquals(17, sizeof($playerDeck->getCardCollection()));
     }
 }

@@ -7,12 +7,13 @@ use PHPUnit\Framework\TestCase;
 
 class PlayerTest extends TestCase
 {
-    public function testHasInnitialValues()
+    public function testHasInitialValues()
     {
         $player = new Player();
 
-        $this->assertEquals($player->getHealth(), 30);
-        $this->assertEquals($player->getMana(), 0);
+        $this->assertEquals(30, $player->getHealth());
+        $this->assertEquals(0, $player->getMana());
         $this->assertClassHasAttribute('deck', Player::class);
+        $this->assertEquals(3, sizeof($player->getInitialHand()));
     }
 }

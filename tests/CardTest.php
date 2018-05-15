@@ -13,6 +13,6 @@ class CardTest extends TestCase
         $someCardMana = 4;
         $card->setManaCost($someCardMana);
 
-        self::assertSame($card->getManaCost(), $someCardMana);
+        self::assertSame($someCardMana, $card->getManaCost());
     }
 }
