@@ -41,9 +41,19 @@ class DeckTest extends TestCase
             8,
         ];
 
+        $result = $this->differenceBetweenDeckManaCostAndInnitialValues($deck, $cardInitialManaCosts);
+
+        self::assertEquals(0, sizeof($result));
+    }
+
+    private function differenceBetweenDeckManaCostAndInnitialValues($deck, $cardInitialManaCosts)
+    {
         foreach ($deck->getCardCollection() as $card) {
-            self::assertEquals(array_shift($cardInitialManaCosts), $card->getManaCost());
+            $manaKey = array_search($card->getManaCost(), $cardInitialManaCosts);
+            unset($cardInitialManaCosts[$manaKey]);
         }
+
+        return $cardInitialManaCosts;
     }
 
     public function testDeckRemainingCardsAfterInitialHand()

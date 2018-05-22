@@ -53,6 +53,8 @@ class Deck
             $card->setManaCost($manaCost);
             $this->cardCollection[] = $card;
         }
+
+        shuffle($this->cardCollection);
     }
 
     public function getCardCollection()
@@ -62,6 +64,6 @@ class Deck
 
     public function extractCardFromDeck()
     {
-
+        return array_shift($this->cardCollection);
     }
 }

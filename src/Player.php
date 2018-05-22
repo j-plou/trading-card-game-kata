@@ -33,8 +33,9 @@ class Player
 
     private function recieveInitialHand()
     {
-        $this->hand
-            = array_rand($this->deck->getCardCollection(), self::INITIAL_HAND_SIZE);
+        for ($cardCounter = 0; $cardCounter < self::INITIAL_HAND_SIZE; $cardCounter++) {
+            $this->hand[] = $this->deck->extractCardFromDeck();
+        }
     }
 
     public function getInitialHand()
